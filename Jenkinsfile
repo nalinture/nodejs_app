@@ -1,20 +1,20 @@
 pipeline{
     agent any
-    tools {nodejs "Node"}
+    tools {nodejs "20.4.0"}
     stages {
-        stage('checkout'){
+   /*     stage('checkout'){
             steps{
                 git branch: 'main',
                     url: 'https://github.com/nalinture/nodejs_app.git'
             }
-        }
+        } */
         
-        stage('Install Dependencies'){
+        stage('Build'){
             steps {
                 sh 'npm install'
             }
         }
-         stage('Install pm2'){
+         stage('Build pm2'){
             steps {
                 sh 'npm install pm2 -g'
             }
