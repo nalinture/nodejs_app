@@ -1,0 +1,31 @@
+name: pvs/nodejs_testing
+on:
+  workflow_dispatch:
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3.5.0
+    - name: sh
+      shell: bash
+      run: npm install
+  Build_pm2:
+    name: Build pm2
+    runs-on: ubuntu-latest
+    needs: Build
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3.5.0
+    - name: sh
+      shell: bash
+      run: npm install pm2 -g
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: Build_pm2
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3.5.0
+    - name: sh
+      shell: bash
+      run: pm2 startOrRestart pm2.config.json
